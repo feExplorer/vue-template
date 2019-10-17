@@ -1,4 +1,5 @@
 const path = require('path');
+const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
 function resolve(dir) {
   //此处使用path.resolve 或path.join 可自行调整
@@ -6,6 +7,36 @@ function resolve(dir) {
 }
 module.exports = {
   lintOnSave: false,
+  css: {
+    // css拆分ExtractTextPlugin插件，默认true - 骨架屏需要为true
+    extract: true,
+  },
+  configureWebpack: config => {
+    // 骨架屏
+    config.plugins.push(
+      new SkeletonWebpackPlugin({
+        webpackConfig: {
+          entry: {
+            app: path.join(__dirname, "./src/skeleton/index.js")
+          }
+        },
+        minimize: true,
+        quiet: true,
+        router: {
+          mode: "hash",
+          routes: [{
+              path: "/about", //和router.js中的路径一样就行
+              skeletonId: "skeleton1" //之前的id
+            },
+            // {
+            //   path: "/withdraw",
+            //  skeletonId: "skeleton2"
+            // }
+          ]
+        }
+      })
+    );
+  },
   chainWebpack: config => {
 
     var externals = {

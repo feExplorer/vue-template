@@ -13,7 +13,7 @@ export function requestFailFunc(err) {
 }
 // 响应成功回调函数
 export function responseSuccessFunc(data) {
-  const responseCode = data.code
+  const responseCode = data.status
   // 如果返回的状态码为200，说明接口请求成功，可以正常拿到数据
   // 否则的话抛出错误
   if (responseCode === 200) {

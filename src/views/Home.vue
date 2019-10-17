@@ -17,6 +17,8 @@ export default {
   mounted() {
     this.$ajax.post("http://api.xuege100.com/tl_index/analys/single_analys", {
       article_content: "veniam dolor occaecat"
+    }).then(res=>{
+      console.log("home")
     });
   }
 };
